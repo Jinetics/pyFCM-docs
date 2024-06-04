@@ -66,7 +66,7 @@ def __init__(self,
 def start_log(self) -> None:
     """
     This starts the logging of data in the background
-    (automatically initiated if `file_output` of the PCM class is set to True [which is the default)
+    (automatically initiated if `file_output` of the PCM class is set to True [which is the default])
     :return: None
     """
 ```

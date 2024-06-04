@@ -26,7 +26,7 @@ from pyFCM.data_acquisition_hardware import LabJackT7
 
 # Software initialization
 lj = LabJackT7()
-lcm = LCMTUM(lj)
+lcm = LCM(lj)
 
 pcm = PCM(electrical_module=lcm,
           sample_id="test"
@@ -52,7 +52,7 @@ from pyFCM.load_hardware import Load
 
 # Software initialization
 lj = LabJackT7()
-ecm = ECMTUM(lj)
+ecm = ECM(lj)
 afm = AFM()
 cfm = CFM()
 lh = Load()
