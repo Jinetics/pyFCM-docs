@@ -34,9 +34,9 @@ plugins:
   - search
 
 nav:
-  - Overview: 'index.md'
-  - Functions: 'functions.md'
-  - Initialization: 'init.md'
+  - Software Overview: 'index.md'
+  - Initialization and Usage: 'init.md'
+  - Available Functions: 'functions.md'
   - Hardware Customization: 'custom.md'
 
 markdown_extensions:
