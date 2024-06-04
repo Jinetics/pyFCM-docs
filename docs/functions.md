@@ -64,7 +64,84 @@ def __init__(self,
     """
 ```
 
-## Basic Functions that only Require `electrical_control_module`
+
+## Basic Functions only Requiring `electrical_control_module`
+
+```Python3
+def start_log(self) -> None:
+    """
+    This starts the logging of data in the background
+    (automatically initiated if `file_output` of the PCM class is set to True [which is the default)
+    :return: None
+    """
+```
+
+```Python3
+def stop_log(self) -> None:
+    """
+    This stops/pauses the logging of data in the background
+    :return: None
+    """
+```
+
+```Python3
+def wait(self, *, duration: float, skipable: bool = False, skip_voltage: float | None = None) -> None:
+    """
+    Requires `electrical_control_module` if `skip_voltage` is specified
+    Waits for the specified duration. If `skipable` is True then this wait can be skipped by pressing
+    the `end` key on the keyboard.
+    If `skip_voltage` is specified the wait is skipped if the response voltage is less than that value.
+    :param duration: (float) Duration in seconds
+    :param skipable: (bool) Whether to be able to skip the wait (by pressing `end` key on the keyboard)
+        Default: False
+    :param skip_voltage: (float | None) Voltage that determines the skipping trigger
+        Default: None
+    :return: None
+    """
+```
+
+```Python3
+def log_text(self, *, text: str) -> None:
+    """
+    Add text to the log file.
+    :param text: (str) The text to be logged.
+    :return: None
+    """
+```
+
+```Python3
+def hardware_reset(self, default_gas_anode: str = 'H2', default_gas_cathode: str = 'air') -> None:
+    """
+    Resets all hardware components that were initialized.
+    :param default_gas_anode: (str) Default gas for anode (only relevant if `anode_flow_module` is utilized)
+        Default: 'H2'
+    :param default_gas_cathode: (str) Default gas for cathode (only relevant if `cathode_flow_module` is utilized)
+        Default: 'air'
+    :return: None
+    """
+```
+
+```Python3
+def switch_open_circuit(self) -> None:
+    """
+    Requires `electrical_control_module`
+    Switches to open circuit condition.
+    :return: None
+    """
+```
+
+```Python3
+def avg_V(self, *, duration: float) -> float:
+    """
+    Requires `electrical_control_module`
+    Calculates the average voltage measured during a given duration.
+    :param duration: (float) The duration for the averaging process.
+    :return: (float) The average voltage
+    """
+```
+
+
+## Electrolyzer-only Functions Requiring `electrical_control_module`
 
 ```Python3
 def set_gas_pressure_anode(self, *, gas_pressure: float) -> None:
@@ -89,6 +166,7 @@ def set_gas_pressure_cathode(self, *, gas_pressure: float) -> None:
 ```Python3
 def reset_pressures(self) -> None:
     """
+    Requires `electrical_control_module`; electrolyzer-only function
     Resets both anode and cathode pressures to 0.
     :return: None
     """
@@ -112,23 +190,8 @@ def read_impurities(self) -> tuple[float, float]:
     """
 ```
 
-```Python3
-def read_flows_anode(self) -> tuple[float, float, str | float | None]:
-    """
-    Requires `anode_flow_module`
-    Reads the gas and water flows of the anode.
-    :return: (tuple[float, float, str | float | None]) gas flow, water flow, and gas ID for the anode
-    """
-```
 
-```Python3
-def read_flows_cathode(self) -> tuple[float, float, str | float | None]:
-    """
-    Requires `cathode_flow_module`
-    Reads the gas and water flows of the cathode.
-    :return: (tuple[float, float, str | float | None]) gas flow, water flow, and gas ID for the cathode
-    """
-```
+## Functions Requiring `heater_control_module`
 
 ```Python3
 def read_values(self) -> list[float]:
@@ -136,50 +199,6 @@ def read_values(self) -> list[float]:
     Requires `temperature_control_module`
     Reads the temperature (or other) values. Up to 8 values.
     :return: (list[float]) List of values that were read
-    """
-```
-
-```Python3
-def read_back_pressures(self) -> tuple[float, float]:
-    """
-    Requires `electrical_control_module`; fuel cell-only function
-    Reads the cathode and anode back-pressures.
-    :return: (tuple[float, float]) Typle of anode and cathode back-pressures
-    """
-```
-
-```Python3
-def start_log(self) -> None:
-    """
-    This starts the logging of data in the background
-    (automatically initiated if `file_output` of the PCM class is set to True [which is the default)
-    :return: None
-    """
-```
-
-```Python3
-def stop_log(self) -> None:
-    """
-    This stops/pauses the logging of data in the background
-    :return: None
-    """
-```
-
-```Python3
-def avg_V(self, *, duration: float) -> float:
-    """
-    Calculates the average voltage measured during a given duration.
-    :param duration: (float) The duration for the averaging process.
-    :return: (float) The average voltage
-    """
-```
-
-```Python3
-def log_text(self, *, text: str) -> None:
-    """
-    Add text to the log file.
-    :param text: (str) The text to be logged.
-    :return: None
     """
 ```
 
@@ -207,6 +226,81 @@ def set_values(self, *, temp1: float = np.nan, temp2: float = np.nan, temp3: flo
     :param temp8: (float) Value 8
         Default: np.nan
     :return: None
+    """
+```
+
+
+## Functions Requiring `backpressure_module`
+
+```Python3
+def read_back_pressures(self) -> tuple[float, float]:
+    """
+    Requires `electrical_control_module`; fuel cell-only function
+    Reads the cathode and anode back-pressures.
+    :return: (tuple[float, float]) Typle of anode and cathode back-pressures
+    """
+```
+
+```Python3
+def set_bkp_anode(self, *, pressure_setpoint: int, power: int = 4) -> None:
+    """
+    Requires `backpressure_module` and `anode_flow_module`
+    Sets the back-pressure of the anode.
+    :param pressure_setpoint: (int) The back-pressure set point of the anode
+    :param power: (int) Power level of the anode
+        Default: 4
+    :return: None
+    """
+```
+
+```Python3
+def set_bkp_cathode(self, *, pressure_setpoint: int, power: int = 4) -> None:
+    """
+    Requires `backpressure_module` and `cathode_flow_module`
+    Sets the back-pressure of the cathode.
+    :param pressure_setpoint: (int) The back-pressure set point of the cathode
+    :param power: (int) Power level of the cathode
+        Default: 4
+    :return: None
+    """
+```
+
+```Python3
+def reset_bkp_anode(self) -> None:
+    """
+    Requires `backpressure_module`
+    Resets the back-pressure of the anode.
+    :return: None
+    """
+```
+
+```Python3
+def reset_bkp_cathode(self) -> None:
+    """
+    Requires `backpressure_module`
+    Resets the back-pressure of the cathode.
+    :return: None
+    """
+```
+
+
+## Functions Requiring `anode_flow_module` and/or `cathode_flow_module`
+
+```Python3
+def read_flows_anode(self) -> tuple[float, float, str | float | None]:
+    """
+    Requires `anode_flow_module`
+    Reads the gas and water flows of the anode.
+    :return: (tuple[float, float, str | float | None]) gas flow, water flow, and gas ID for the anode
+    """
+```
+
+```Python3
+def read_flows_cathode(self) -> tuple[float, float, str | float | None]:
+    """
+    Requires `cathode_flow_module`
+    Reads the gas and water flows of the cathode.
+    :return: (tuple[float, float, str | float | None]) gas flow, water flow, and gas ID for the cathode
     """
 ```
 
@@ -253,58 +347,6 @@ def set_water_flowrate_cathode(self, *, flow: float) -> None:
     :return: None
     """
 ```
-
-```Python3
-def calculate_and_set_water_flowrate_anode(self, *, pressure: float, gasflow: float | None = None,
-                                           gas: str | None = None, waterflow_delta: float = 0.0, rH: float = 100.0,
-                                           temp_cell: float | None = None, verbose: bool = False) -> None:
-    """
-    Requires `anode_flow_module` and `heater_control_module`
-    Calculates and sets the water flow rate of the anode based on specified gasflow, pressure, temperature,
-    and targeted rH. This utilizes our in-house machine learning model.
-    :param pressure: (float) The backpressure pressure of the anode
-    :param gasflow: (float) The gas pressure of the anode
-        Default: None
-    :param gas: (str | None) The gas ID
-        Default: None
-    :param waterflow_delta: (float) Any deviation added to the waterflow rate (correction term).
-        Default: 0.0
-    :param rH: (float) The targeted rH (in percent)
-        Default: 100.0
-    :param temp_cell: (float) Temperature of the cell (in Celsius)
-        Default: None
-    :param verbose: (bool) Whether to print out additional information.
-        Default: False
-    :return: None
-    """
-```
-
-```Python3
-def calculate_and_set_water_flowrate_cathode(self, *, pressure: float, gasflow: float | None = None,
-                                             gas: str | None = None, waterflow_delta: float = 0.0,
-                                             rH: float = 100.0, temp_cell: float | None = None,
-                                             verbose: bool = False) -> None:
-    """
-   Requires `cathode_flow_module` and `heater_control_module`
-   Calculates and sets the water flow rate of cathode based on specified gasflow, pressure, temperature,
-   and targeted rH. This utilizes our in-house machine learning model.
-   :param pressure: (float) The backpressure pressure of the cathode
-   :param gasflow: (float) The gas pressure of the cathode
-       Default: None
-   :param gas: (str | None) The gas ID
-       Default: None
-   :param waterflow_delta: (float) Any deviation added to the waterflow rate (correction term).
-       Default: 0.0
-   :param rH: (float) The targeted rH (in percent)
-       Default: 100.0
-   :param temp_cell: (float) Temperature of the cell (in Celsius)
-       Default: None
-   :param verbose: (bool) Whether to print out additional information.
-       Default: False
-   :return: None
-   """
-```
-
 ```Python3
 def reset_gases_anode(self, default_gas: str = 'H2') -> None:
     """
@@ -384,63 +426,62 @@ def switch_to_air_cathode(self) -> None:
     """
 ```
 
-```Python3
-def set_bkp_anode(self, *, pressure_setpoint: int, power: int = 4) -> None:
-    """
-    Requires `backpressure_module` and `anode_flow_module`
-    Sets the back-pressure of the anode.
-    :param pressure_setpoint: (int) The back-pressure set point of the anode
-    :param power: (int) Power level of the anode
-        Default: 4
-    :return: None
-    """
-```
+
+## Functions Requiring `anode_flow_module`/`cathode_flow_module` and `heater_control_module`
 
 ```Python3
-def set_bkp_cathode(self, *, pressure_setpoint: int, power: int = 4) -> None:
+def calculate_and_set_water_flowrate_anode(self, *, pressure: float, gasflow: float | None = None,
+                                           gas: str | None = None, waterflow_delta: float = 0.0, rH: float = 100.0,
+                                           temp_cell: float | None = None, verbose: bool = False) -> None:
     """
-    Requires `backpressure_module` and `cathode_flow_module`
-    Sets the back-pressure of the cathode.
-    :param pressure_setpoint: (int) The back-pressure set point of the cathode
-    :param power: (int) Power level of the cathode
-        Default: 4
-    :return: None
-    """
-```
-
-```Python3
-def reset_bkp_anode(self) -> None:
-    """
-    Requires `backpressure_module`
-    Resets the back-pressure of the anode.
-    :return: None
-    """
-```
-
-```Python3
-def reset_bkp_cathode(self) -> None:
-    """
-    Requires `backpressure_module`
-    Resets the back-pressure of the cathode.
-    :return: None
-    """
-```
-
-```Python3
-def wait(self, *, duration: float, skipable: bool = False, skip_voltage: float | None = None) -> None:
-    """
-    Requires `electrical_control_module` if `skip_voltage` is specified
-    Waits for the specified duration. If `skipable` is True then this wait can be skipped by pressing
-    the `end` key on the keyboard.
-    If `skip_voltage` is specified the wait is skipped if the response voltage is less than that value.
-    :param duration: (float) Duration in seconds
-    :param skipable: (bool) Whether to be able to skip the wait (by pressing `end` key on the keyboard)
-        Default: False
-    :param skip_voltage: (float | None) Voltage that determines the skipping trigger
+    Requires `anode_flow_module` and `heater_control_module`
+    Calculates and sets the water flow rate of the anode based on specified gasflow, pressure, temperature,
+    and targeted rH. This utilizes our in-house machine learning model.
+    :param pressure: (float) The backpressure pressure of the anode
+    :param gasflow: (float) The gas pressure of the anode
         Default: None
+    :param gas: (str | None) The gas ID
+        Default: None
+    :param waterflow_delta: (float) Any deviation added to the waterflow rate (correction term).
+        Default: 0.0
+    :param rH: (float) The targeted rH (in percent)
+        Default: 100.0
+    :param temp_cell: (float) Temperature of the cell (in Celsius)
+        Default: None
+    :param verbose: (bool) Whether to print out additional information.
+        Default: False
     :return: None
     """
 ```
+
+```Python3
+def calculate_and_set_water_flowrate_cathode(self, *, pressure: float, gasflow: float | None = None,
+                                             gas: str | None = None, waterflow_delta: float = 0.0,
+                                             rH: float = 100.0, temp_cell: float | None = None,
+                                             verbose: bool = False) -> None:
+    """
+   Requires `cathode_flow_module` and `heater_control_module`
+   Calculates and sets the water flow rate of cathode based on specified gasflow, pressure, temperature,
+   and targeted rH. This utilizes our in-house machine learning model.
+   :param pressure: (float) The backpressure pressure of the cathode
+   :param gasflow: (float) The gas pressure of the cathode
+       Default: None
+   :param gas: (str | None) The gas ID
+       Default: None
+   :param waterflow_delta: (float) Any deviation added to the waterflow rate (correction term).
+       Default: 0.0
+   :param rH: (float) The targeted rH (in percent)
+       Default: 100.0
+   :param temp_cell: (float) Temperature of the cell (in Celsius)
+       Default: None
+   :param verbose: (bool) Whether to print out additional information.
+       Default: False
+   :return: None
+   """
+```
+
+
+## Functions Requiring `electrical_control_module` and `load_hardware`
 
 ```Python3
 def OCV(self, *, duration: float, skipable: bool = False) -> None:
@@ -492,29 +533,8 @@ def FC_mode_CV(self, *, duration: float, load_voltage: list[float] | float, curr
     """
 ```
 
-```Python3
-def starvation_loop(self, *, cycles: int, duration1: float, anode_flow1: float, cathode_flow1: float,
-                    load_current1: float, duration2: float, anode_flow2: float, cathode_flow2: float,
-                    load_current2: float, Vskip: float, final_OCV: bool = True) -> None:
-    """
-    Requires `electrical_control_module`, `load_hardware`, `anode_flow_module`, and `cathode_flow_module`
-    Starvation loop procedure for specified number of cycles between two states,
-    each with a specified duration, anode/cathode flows and a load current
-    :param cycles: (int) Number of cycles
-    :param duration1: (float) Duration of state 1
-    :param anode_flow1: (float) Anode flow of state 1
-    :param cathode_flow1: (float) Cathode flow of state 1
-    :param load_current1: (float) Load current of state 1
-    :param duration2: (float) Duration of state 2
-    :param anode_flow2: (float) Anode flow of state 2
-    :param cathode_flow2: (float) Cathode flow of state 2
-    :param load_current2: (float) Load current of state 2
-    :param Vskip: (float) Voltage that determines skipping condition
-    :param final_OCV: (bool) Whether to end in OCV
-        Default: True
-    :return: None
-    """
-```
+
+## Functions Requiring `electrical_control_module` and `potentiostat_hardware`
 
 ```Python3
 def cyclic_voltammetry(self, *, V_start: float, V1: float, V2: float, V_end: float, scan_rate: float, n_cycles: int,
@@ -540,7 +560,7 @@ def cyclic_voltammetry(self, *, V_start: float, V1: float, V2: float, V_end: flo
 ```Python3
 def CV_potentiostat(self, *, voltages: list, hold_time: float = 300.0, plot: bool = True) -> None:
     """
-    Requires `potentiostat_hardware` and `electrical_control_module`
+    Requires `electrical_control_module` and `potentiostat_hardware`
     CV mode with potentiostat for specified list of voltages at specified holding time.
     :param voltages: (list) List of voltages
     :param hold_time: (float) Hold time in seconds
@@ -556,7 +576,7 @@ def squarewave_potentiostat(self, *, voltage1: float, voltage2: float, hold_time
                             hold_time_2: float = 3.0, ascend_time: float = 0.1, descend_time: float = 0.1,
                             n_cycles: int = 10000, plot: bool = True) -> None:
     """
-    Requires `potentiostat_hardware` and `electrical_control_module`
+    Requires `electrical_control_module` and `potentiostat_hardware`
     Squarewave potentiostat mode between two states of defined voltages, holding times for specified
     number of cycles with ascending and descending times.
     :param voltage1: (float) Voltage at state 1
@@ -576,6 +596,8 @@ def squarewave_potentiostat(self, *, voltage1: float, voltage2: float, hold_time
     :return: None
     """
 ```
+
+## Function Requiring `potentiostat_hardware`, `load_hardware`, and `electrical_control_module`
 
 ```Python3
 def EIS_load(self, *, base_current: float, perturbation_percentage: float, starting_frequency: float = 10000.0,
@@ -601,23 +623,29 @@ def EIS_load(self, *, base_current: float, perturbation_percentage: float, start
     """
 ```
 
-```Python3
-def switch_open_circuit(self) -> None:
-    """
-    Requires `electrical_control_module`
-    Switches to open circuit condition.
-    :return: None
-    """
-```
+
+## Function Requiring `electrical_control_module`, `load_hardware`, `anode_flow_module`, and `cathode_flow_module`
 
 ```Python3
-def hardware_reset(self, default_gas_anode: str = 'H2', default_gas_cathode: str = 'air') -> None:
+def starvation_loop(self, *, cycles: int, duration1: float, anode_flow1: float, cathode_flow1: float,
+                    load_current1: float, duration2: float, anode_flow2: float, cathode_flow2: float,
+                    load_current2: float, Vskip: float, final_OCV: bool = True) -> None:
     """
-    Resets all hardware components that were initialized.
-    :param default_gas_anode: (str) Default gas for anode (only relevant if `anode_flow_module` is utilized)
-        Default: 'H2'
-    :param default_gas_cathode: (str) Default gas for cathode (only relevant if `cathode_flow_module` is utilized)
-        Default: 'air'
+    Requires `electrical_control_module`, `load_hardware`, `anode_flow_module`, and `cathode_flow_module`
+    Starvation loop procedure for specified number of cycles between two states,
+    each with a specified duration, anode/cathode flows and a load current
+    :param cycles: (int) Number of cycles
+    :param duration1: (float) Duration of state 1
+    :param anode_flow1: (float) Anode flow of state 1
+    :param cathode_flow1: (float) Cathode flow of state 1
+    :param load_current1: (float) Load current of state 1
+    :param duration2: (float) Duration of state 2
+    :param anode_flow2: (float) Anode flow of state 2
+    :param cathode_flow2: (float) Cathode flow of state 2
+    :param load_current2: (float) Load current of state 2
+    :param Vskip: (float) Voltage that determines skipping condition
+    :param final_OCV: (bool) Whether to end in OCV
+        Default: True
     :return: None
     """
 ```

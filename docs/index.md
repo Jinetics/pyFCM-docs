@@ -20,17 +20,17 @@ with each hardware component:
 1. The hardware component is supplied by Jinetics and the related software interface code is therefore also 
 supplied by Jinetics.
 2. The hardware component is sourced by the user. In this case, the interface code needs to be completed by 
-the user through template interface files (more on that in the next section).
+the user through template interface files (more details on [this page](custom.md)).
 
 A list of high-level functions is available in the pyFCM suite and some of them rely on the availability of 
-certain hardware components. A complete list of available functions is available here.
+certain hardware components. A complete list of available functions is available [here](functions.md).
 
 ## Software Structure
 
-The main entry point for using the pyFCM software is the **process control module** which has high-level functions
-related to electrolyzer and/or fuel cell testing protocols. It also logs data from all hardware components which are 
-initialized through the software suite. Further, it monitors certain signals that can act as kill switch conditions to
-shut off the system.
+The main entry point for using the pyFCM software is the **process control module** and its `PCM` class which has 
+high-level functions related to electrolyzer and/or fuel cell testing protocols. It also logs data from all 
+hardware components which are initialized through the software suite. 
+Further, it monitors certain signals that can act as kill switch conditions to shut off the system.
 
 Here is a full list of all software interfaces with the hardware components:
 
