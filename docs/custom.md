@@ -3,7 +3,7 @@ hide:
   - toc
 ---
 
-# Hardware Customization Through Python Interface
+# Hardware Customization Through the pyFCM Python Interface
 
 Jinetics enables the user to use their own custom hardware and supplies template Python interfaces. 
 The user then needs to complete the necessary class functions for their specific hardware/use case.
@@ -38,7 +38,7 @@ class CustomLoad:
         """
         Put any code that needs to be run to prepare the load before setting currents.
         :param load_current_range: Variable that determines the load range (optional variable)
-        :return:
+        :return: None
         """
         # Code here
         self.load.write(':SOUR:FUNC CURR')  # EXAMPLE
@@ -47,7 +47,7 @@ class CustomLoad:
         """
         Put code that sets the current of the load.
         :param current: Current set point
-        :return:
+        :return: None
         """
         # Code here
         self.load.write(':SOUR:CURR:LEV:IMM {:.2f}'.format(current))  # EXAMPLE
@@ -55,14 +55,14 @@ class CustomLoad:
     def post_current(self):
         """
         Put any code that needs to be run at the end of current measurements (e.g. turn off load).
-        :return:
+        :return: None
         """
         # Code here
 
     def pre_bias(self) -> None:
         """
         Put any code that needs to be run to prepare the load before setting a voltage.
-        :return:
+        :return: None
         """
         # Code here
         self.load.write(':SOUR:FUNC VOLT')  # EXAMPLE
@@ -71,7 +71,7 @@ class CustomLoad:
         """
         Put code that sets the bias of the load.
         :param voltage:
-        :return:
+        :return: None
         """
         # Code here
         self.load.write(':SOUR:VOLT:LEV:IMM {:.2f}'.format(voltage))  # EXAMPLE
@@ -79,7 +79,7 @@ class CustomLoad:
     def post_bias(self) -> None:
         """
         Put any code that needs to be run at the end of voltage measurements (e.g. turn off load).
-        :return:
+        :return: None
         """
         # Code here
         self.load.write(':SOUR:SENS 0')  # EXAMPLE
@@ -87,7 +87,7 @@ class CustomLoad:
     def turn_on(self) -> None:
         """
         Code to turn on the load device.
-        :return:
+        :return: None
         """
         # Code here
         self.load.write(':SOUR:INP:STAT 1')  # EXAMPLE
@@ -95,7 +95,7 @@ class CustomLoad:
     def turn_off(self) -> None:
         """
         Code to turn off the load device.
-        :return:
+        :return: None
         """
         # Code here
         self.load.write(':SOUR:INP:STAT 0')  # EXAMPLE

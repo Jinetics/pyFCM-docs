@@ -34,13 +34,17 @@ shut off the system.
 
 Here is a full list of all software interfaces with the hardware components:
 
-- `electrical_control_module` (for fuel cell testing; always provided by Jinetics): This interface works with the 
+- `electrical_control_module` (always provided by Jinetics)
+    - For fuel cell testing: This interface works with the 
 main electrical unit (Labjack T7) to measure voltages/currents during fuel cell testing and set the states of 
 3 relays (one of which acts as an MFC shutoff). It also reads the backpressures from the backpressure 
 hardware (if provided by Jinetics).
-- `electrical_control_module` (for fuel cell testing; always provided by Jinetics): This interface works with the 
+    - For fuel cell testing: This interface works with the 
 main electrical unit (Labjack T7) to measure voltages/currents during electrolyzer testing and read & set the 
 anode and cathode gas pressures. It sets the states of 3 relays (one of which acts as an MFC shutoff).
+    - `data_aquisition_hardware`: This module interfaces with LabJack hardware provided by Jinetics. 
+This class is initialized and used as an input variable during initialization of 
+the `electrical_control_module`.
 - `heater_control_module` (optionally provided by Jinetics): This interface is designed to measure and set up
 to 8 temperatures. If not provided by Jinetics, then any 8 values can be set/measured (not necessarily related to 
 temperature).

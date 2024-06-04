@@ -39,9 +39,6 @@ nav:
   - Initialization: 'init.md'
   - Hardware Customization: 'custom.md'
 
-hide:
-  - toc
-
 markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true
