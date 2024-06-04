@@ -1,0 +1,70 @@
+site_name: Documentation for pyFCM v2+
+# site_url: https://
+theme:
+  favicon: logo.png
+  name: material
+  features:
+    - navigation.footer
+    - navigation.path
+    - navigation.tracking
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.copy
+  language: en
+  logo: logo.png
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline 
+        name: Switch to dark mode
+      primary: teal
+      accent: purple 
+    - scheme: slate 
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode    
+      primary: teal
+      accent: lime
+
+plugins:
+#  - social
+  - search
+
+# extra:
+#  social:
+#    - icon: fontawesome/brands/github-alt
+#      link: https://github.com/james-willett
+#    - icon: fontawesome/brands/twitter
+#      link: https://twitter.com/TheJamesWillett
+#    - icon: fontawesome/brands/linkedin
+#      link: https://www.linkedin.com/in/willettjames/
+
+nav:
+  - Overview: 'index.md'
+  - Functions: 'functions.md'
+  - Initialization: 'init.md'
+  - Hardware Customization: 'custom.md'
+
+hide:
+  - toc
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - admonition
+  - pymdownx.arithmatex:
+      generic: true
+  - footnotes
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.mark
+  - attr_list
+
+copyright: |
+  &copy; 2024 Jinetics
