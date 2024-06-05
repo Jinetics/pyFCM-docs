@@ -3,6 +3,11 @@
 Here is a comprehensive list of all available functions and the input variables for each. Also, it is states 
 which hardware components need to be initialized for each function.
 
+!!! note
+    
+    The `self` keyword is related to object-oriented programming and is not 
+    to be filled by the user when used.
+
 ## Initialization Options of the `PCM` Class
 
 ```Python3
@@ -80,7 +85,7 @@ def stop_log(self) -> None:
 ```
 
 ```Python3
-def wait(self, *, duration: float, skipable: bool = False, skip_voltage: float | None = None) -> None:
+def wait(self, duration: float, skipable: bool = False, skip_voltage: float | None = None) -> None:
     """
     Requires `electrical_control_module` if `skip_voltage` is specified
     Waits for the specified duration. If `skipable` is True then this wait can be skipped by pressing
@@ -96,7 +101,7 @@ def wait(self, *, duration: float, skipable: bool = False, skip_voltage: float |
 ```
 
 ```Python3
-def log_text(self, *, text: str) -> None:
+def log_text(self, text: str) -> None:
     """
     Add text to the log file.
     :param text: (str) The text to be logged.
@@ -126,7 +131,7 @@ def switch_open_circuit(self) -> None:
 ```
 
 ```Python3
-def avg_V(self, *, duration: float) -> float:
+def avg_V(self, duration: float) -> float:
     """
     Requires `electrical_control_module`
     Calculates the average voltage measured during a given duration.
@@ -139,7 +144,7 @@ def avg_V(self, *, duration: float) -> float:
 ## Electrolyzer-only Functions Requiring `electrical_control_module`
 
 ```Python3
-def set_gas_pressure_anode(self, *, gas_pressure: float) -> None:
+def set_gas_pressure_anode(self, gas_pressure: float) -> None:
     """
     Requires `electrical_control_module`; electrolyzer-only function
     Set the gas pressure of the anode.
@@ -149,7 +154,7 @@ def set_gas_pressure_anode(self, *, gas_pressure: float) -> None:
 ```
 
 ```Python3
-def set_gas_pressure_cathode(self, *, gas_pressure: float) -> None:
+def set_gas_pressure_cathode(self, gas_pressure: float) -> None:
     """
     Requires `electrical_control_module`; electrolyzer-only function
     Set the gas pressure of the cathode.
@@ -198,7 +203,7 @@ def read_values(self) -> list[float]:
 ```
 
 ```Python3
-def set_values(self, *, temp1: float = np.nan, temp2: float = np.nan, temp3: float = np.nan, temp4: float = np.nan,
+def set_values(self, temp1: float = np.nan, temp2: float = np.nan, temp3: float = np.nan, temp4: float = np.nan,
                temp5: float = np.nan, temp6: float = np.nan, temp7: float = np.nan,
                temp8: float = np.nan) -> None:
     """
@@ -237,7 +242,7 @@ def read_back_pressures(self) -> tuple[float, float]:
 ```
 
 ```Python3
-def set_bkp_anode(self, *, pressure_setpoint: int, power: int = 4) -> None:
+def set_bkp_anode(self, pressure_setpoint: int, power: int = 4) -> None:
     """
     Requires `backpressure_module` and `anode_flow_module`
     Sets the back-pressure of the anode.
@@ -249,7 +254,7 @@ def set_bkp_anode(self, *, pressure_setpoint: int, power: int = 4) -> None:
 ```
 
 ```Python3
-def set_bkp_cathode(self, *, pressure_setpoint: int, power: int = 4) -> None:
+def set_bkp_cathode(self, pressure_setpoint: int, power: int = 4) -> None:
     """
     Requires `backpressure_module` and `cathode_flow_module`
     Sets the back-pressure of the cathode.
@@ -300,7 +305,7 @@ def read_flows_cathode(self) -> tuple[float, float, str | float | None]:
 ```
 
 ```Python3
-def set_gas_flowrate_anode(self, *, flow: float, gas: str | None = None) -> None:
+def set_gas_flowrate_anode(self, flow: float, gas: str | None = None) -> None:
     """
     Requires `anode_flow_module`
     Sets the gas flow rate of the anode.
@@ -312,7 +317,7 @@ def set_gas_flowrate_anode(self, *, flow: float, gas: str | None = None) -> None
 ```
 
 ```Python3
-def set_gas_flowrate_cathode(self, *, flow: float, gas: str | None = None) -> None:
+def set_gas_flowrate_cathode(self, flow: float, gas: str | None = None) -> None:
     """
     Requires `cathode_flow_module`
     Sets the gas flow rate of the cathode.
@@ -324,7 +329,7 @@ def set_gas_flowrate_cathode(self, *, flow: float, gas: str | None = None) -> No
 ```
 
 ```Python3
-def set_water_flowrate_anode(self, *, flow: float) -> None:
+def set_water_flowrate_anode(self, flow: float) -> None:
     """
     Requires `anode_flow_module`
     Sets the water flow rate of the anode.
@@ -334,7 +339,7 @@ def set_water_flowrate_anode(self, *, flow: float) -> None:
 ```
 
 ```Python3
-def set_water_flowrate_cathode(self, *, flow: float) -> None:
+def set_water_flowrate_cathode(self, flow: float) -> None:
     """
     Requires `cathode_flow_module`
     Sets the water flow rate of the cathode.
@@ -425,13 +430,13 @@ def switch_to_air_cathode(self) -> None:
 ## Functions Requiring `anode_flow_module`/`cathode_flow_module` and `heater_control_module`
 
 ```Python3
-def calculate_and_set_water_flowrate_anode(self, *, pressure: float, gasflow: float | None = None,
+def calculate_and_set_water_flowrate_anode(self, pressure: float, gasflow: float | None = None,
                                            gas: str | None = None, waterflow_delta: float = 0.0, rH: float = 100.0,
                                            temp_cell: float | None = None, verbose: bool = False) -> None:
     """
     Requires `anode_flow_module` and `heater_control_module`
     Calculates and sets the water flow rate of the anode based on specified gasflow, pressure, temperature,
-    and targeted rH. This utilizes our in-house machine learning model.
+    and targeted rH. This utilizes our in-house algorithm.
     :param pressure: (float) The backpressure pressure of the anode
     :param gasflow: (float) The gas pressure of the anode
         Default: None
@@ -450,7 +455,7 @@ def calculate_and_set_water_flowrate_anode(self, *, pressure: float, gasflow: fl
 ```
 
 ```Python3
-def calculate_and_set_water_flowrate_cathode(self, *, pressure: float, gasflow: float | None = None,
+def calculate_and_set_water_flowrate_cathode(self, pressure: float, gasflow: float | None = None,
                                              gas: str | None = None, waterflow_delta: float = 0.0,
                                              rH: float = 100.0, temp_cell: float | None = None,
                                              verbose: bool = False) -> None:
@@ -479,7 +484,7 @@ def calculate_and_set_water_flowrate_cathode(self, *, pressure: float, gasflow: 
 ## Functions Requiring `electrical_control_module` and `load_hardware`
 
 ```Python3
-def OCV(self, *, duration: float, skipable: bool = False) -> None:
+def OCV(self, duration: float, skipable: bool = False) -> None:
     """
     Requires `electrical_control_module` and `load_hardware`
     Put system in open curcuit voltage condition for the specified duration.
@@ -491,7 +496,7 @@ def OCV(self, *, duration: float, skipable: bool = False) -> None:
 ```
 
 ```Python3
-def FC_mode_CC(self, *, duration: float, load_current: list[float] | float, current_range: int = 40,
+def FC_mode_CC(self, duration: float, load_current: list[float] | float, current_range: int = 40,
                final_OCV: bool = True, skipable: bool = False, skip_voltage: float | None = None) -> None:
     """
     Requires `electrical_control_module` and `load_hardware`
@@ -511,7 +516,7 @@ def FC_mode_CC(self, *, duration: float, load_current: list[float] | float, curr
 ```
 
 ```Python3
-def FC_mode_CV(self, *, duration: float, load_voltage: list[float] | float, current_range: int = 1,
+def FC_mode_CV(self, duration: float, load_voltage: list[float] | float, current_range: int = 1,
                final_OCV: bool = True, skipable: bool = False) -> None:
     """
     Requires `electrical_control_module` and `load_hardware`
@@ -532,7 +537,7 @@ def FC_mode_CV(self, *, duration: float, load_voltage: list[float] | float, curr
 ## Functions Requiring `electrical_control_module` and `potentiostat_hardware`
 
 ```Python3
-def cyclic_voltammetry(self, *, V_start: float, V1: float, V2: float, V_end: float, scan_rate: float, n_cycles: int,
+def cyclic_voltammetry(self, V_start: float, V1: float, V2: float, V_end: float, scan_rate: float, n_cycles: int,
                        sample_rate: float = 0.01, plot: bool = True) -> None:
     """
     Requires `electrical_control_module` and `potentiostat_hardware`
@@ -553,7 +558,7 @@ def cyclic_voltammetry(self, *, V_start: float, V1: float, V2: float, V_end: flo
 ```
 
 ```Python3
-def CV_potentiostat(self, *, voltages: list, hold_time: float = 300.0, plot: bool = True) -> None:
+def CV_potentiostat(self, voltages: list, hold_time: float = 300.0, plot: bool = True) -> None:
     """
     Requires `electrical_control_module` and `potentiostat_hardware`
     CV mode with potentiostat for specified list of voltages at specified holding time.
@@ -567,7 +572,7 @@ def CV_potentiostat(self, *, voltages: list, hold_time: float = 300.0, plot: boo
 ```
 
 ```Python3
-def squarewave_potentiostat(self, *, voltage1: float, voltage2: float, hold_time_1: float = 3.0,
+def squarewave_potentiostat(self, voltage1: float, voltage2: float, hold_time_1: float = 3.0,
                             hold_time_2: float = 3.0, ascend_time: float = 0.1, descend_time: float = 0.1,
                             n_cycles: int = 10000, plot: bool = True) -> None:
     """
@@ -595,7 +600,7 @@ def squarewave_potentiostat(self, *, voltage1: float, voltage2: float, hold_time
 ## Function Requiring `potentiostat_hardware`, `load_hardware`, and `electrical_control_module`
 
 ```Python3
-def EIS_load(self, *, base_current: float, perturbation_percentage: float, starting_frequency: float = 10000.0,
+def EIS_load(self, base_current: float, perturbation_percentage: float, starting_frequency: float = 10000.0,
              ending_frequency: float = 20.0, points_per_decade: int = 20,
              base_current_wait: float = 5.0, plot: bool = True) -> None:
     """
@@ -622,7 +627,7 @@ def EIS_load(self, *, base_current: float, perturbation_percentage: float, start
 ## Function Requiring `electrical_control_module`, `load_hardware`, `anode_flow_module`, and `cathode_flow_module`
 
 ```Python3
-def starvation_loop(self, *, cycles: int, duration1: float, anode_flow1: float, cathode_flow1: float,
+def starvation_loop(self, cycles: int, duration1: float, anode_flow1: float, cathode_flow1: float,
                     load_current1: float, duration2: float, anode_flow2: float, cathode_flow2: float,
                     load_current2: float, Vskip: float, final_OCV: bool = True) -> None:
     """

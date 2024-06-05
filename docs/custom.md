@@ -24,11 +24,11 @@ class CustomLoad:
 
     def __init__(self, address: str = 'test', verbose: bool = False):
         """
-        Code in here what is required to initialize the load hardware.
+        Add code here that is required to initialize the load hardware.
         :param address: Address to connect to load, something like 'USB0::....'
         :param verbose: Variable to handle if text is printed out or not (optional)
         """
-        # Code here.
+        # Put your initialization code here; the example below is for pyvisa-based communication.
         rm = pyvisa.ResourceManager()
         self.load = rm.open_resource(address)
         if verbose:
@@ -103,7 +103,7 @@ class CustomLoad:
 
 if __name__ == '__main__':
     # Test your code by running this script
-    load = Load('USB0::.....')
+    load = CustomLoad('USB0::.....')
     # Testing CC mode:
     load.pre_current(current_range=40)
     load.set_current(0.5)

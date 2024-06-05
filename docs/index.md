@@ -9,8 +9,10 @@ This website explains how the pyFCM software suite can be set up and used.
 
 ## Installation
 
-The software which is based on Python is already pre-installed on the supplied computers. 
-It can be used through Python's import statement: `import pyFCM`.
+The software which is based on Python 3.10 is already pre-installed on the supplied computers. 
+It can be used through Python's import statement. 
+For example, the main class can be imported by `from pyFCM.process_control_module import PCM`. 
+Details and examples on initializing the class are explained [here](init.md).
 
 ## Hardware Components and Their Interaction with pyFCM
 
@@ -36,13 +38,13 @@ Here is a full list of all software interfaces with the hardware components:
 
 - `electrical_control_module` (always provided by Jinetics)
     - For fuel cell testing: This interface works with the 
-main electrical unit (Labjack T7) to measure voltages/currents during fuel cell testing and set the states of 
+main electrical unit to measure voltages/currents during fuel cell testing and set the states of 
 3 relays (one of which acts as an MFC shutoff). It also reads the backpressures from the backpressure 
 hardware (if provided by Jinetics).
     - For fuel cell testing: This interface works with the 
-main electrical unit (Labjack T7) to measure voltages/currents during electrolyzer testing and read & set the 
+main electrical unit to measure voltages/currents during electrolyzer testing and read & set the 
 anode and cathode gas pressures. It sets the states of 3 relays (one of which acts as an MFC shutoff).
-    - `data_aquisition_hardware`: This module interfaces with LabJack hardware provided by Jinetics. 
+    - `data_acquisition_hardware`: This module interfaces with the data acquisition hardware provided by Jinetics. 
 This class is initialized and used as an input variable during initialization of 
 the `electrical_control_module`.
 - `heater_control_module` (optionally provided by Jinetics): This interface is designed to measure and set up
@@ -50,19 +52,19 @@ to 8 temperatures. If not provided by Jinetics, then any 8 values can be set/mea
 temperature).
 - `cathode_flow_module` and `anode_flow_module` (for fuel cell testing; optionally provided by Jinetics): These modules
 set and read the flow rates of gases and water for the anode and cathode side during fuel cell testing. It is equipped 
-to switch between multiple gases and uses our in-house machine learning module to set the RH accurately.
+to switch between multiple gases and uses our in-house algorithm module to set the RH accurately.
 - `backpressure_module` (for fuel cell testing; optionally provided by Jinetics): This module sets the backpressures 
 of the anode and cathode during fuel cell testing.
 - `load_hardware` (for fuel cell and electrolyzer testing; optionally provided by Jinetics): This module manages the 
 load during fuel cell testing or manages the power source during electrolyzer testing. It sets voltage and currents 
 during testing.
-- `potentiostate_hardware` (for fuel cell and electrolyzer testing; optionally provided by Jinetics): This module manages
+- `potentiostat_hardware` (for fuel cell and electrolyzer testing; optionally provided by Jinetics): This module manages
 the potentiostat during fuel cell and electrolyzer testing. It enables functions like cyclic voltammetry, 
 squarewave mode, among others.
 
 Furthermore, Jinetics supports additional software components (at additional charge):
 
-- `recipe_loading_module`: Enables the loading of test recipes through step-by-step yaml files.
+- `recipe_loading_module`: Enables the loading of test recipe files for ease of use and editing.
 - `data_plotting_module`: Live-view during data acquisition.
-- `data_analysis`: Analysis code for fuel cell testing protocols and summary of acquired data results.
+- `data_analysis`: Analysis code for fuel cell testing protocols and detailed analysis of acquired data results.
 - A graphic user interface (GUI) that enables the operation of this software without a single line of code.

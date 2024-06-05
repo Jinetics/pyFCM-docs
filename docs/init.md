@@ -22,11 +22,11 @@ To illustrate this, below we will give a few examples:
 ```Python3
 from pyFCM.process_control_module import PCM
 from pyFCM.electrical_control_module import LCM
-from pyFCM.data_acquisition_hardware import LabJackT7
+from pyFCM.data_acquisition_hardware import DAQ
 
 # Software initialization
-lj = LabJackT7()
-lcm = LCM(lj)
+daq = DAQ()
+lcm = LCM(daq)
 
 pcm = PCM(electrical_module=lcm,
           sample_id="test"
@@ -45,14 +45,14 @@ pcm.hardware_reset()
 ```Python3
 from pyFCM.process_control_module import PCM
 from pyFCM.electrical_control_module import ECM
-from pyFCM.data_acquisition_hardware import LabJackT7
+from pyFCM.data_acquisition_hardware import DAQ
 from pyFCM.anode_flow_module import AFM
 from pyFCM.cathode_flow_module import CFM
 from pyFCM.load_hardware import Load
 
 # Software initialization
-lj = LabJackT7()
-ecm = ECM(lj)
+daq = DAQ()
+ecm = ECM(daq)
 afm = AFM()
 cfm = CFM()
 lh = Load()
@@ -79,4 +79,4 @@ pcm.hardware_reset()
 # End of test run
 ```
 
-A full list of available function (depending on which hardware is available at the user) can be found [here](functions.md)
+A full list of available function (depending on which hardware is available at the user) can be found [here](functions.md).
