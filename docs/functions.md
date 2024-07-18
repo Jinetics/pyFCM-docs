@@ -622,30 +622,3 @@ def EIS_load(self, base_current: float, perturbation_percentage: float, starting
     :return: None
     """
 ```
-
-
-## Function Requiring `electrical_control_module`, `load_hardware`, `anode_flow_module`, and `cathode_flow_module`
-
-```Python3
-def starvation_loop(self, cycles: int, duration1: float, anode_flow1: float, cathode_flow1: float,
-                    load_current1: float, duration2: float, anode_flow2: float, cathode_flow2: float,
-                    load_current2: float, Vskip: float, final_OCV: bool = True) -> None:
-    """
-    Requires `electrical_control_module`, `load_hardware`, `anode_flow_module`, and `cathode_flow_module`
-    Starvation loop procedure for specified number of cycles between two states,
-    each with a specified duration, anode/cathode flows and a load current
-    :param cycles: (int) Number of cycles
-    :param duration1: (float) Duration of state 1
-    :param anode_flow1: (float) Anode flow of state 1
-    :param cathode_flow1: (float) Cathode flow of state 1
-    :param load_current1: (float) Load current of state 1
-    :param duration2: (float) Duration of state 2
-    :param anode_flow2: (float) Anode flow of state 2
-    :param cathode_flow2: (float) Cathode flow of state 2
-    :param load_current2: (float) Load current of state 2
-    :param Vskip: (float) Voltage that determines skipping condition
-    :param final_OCV: (bool) Whether to end in OCV
-        Default: True
-    :return: None
-    """
-```
