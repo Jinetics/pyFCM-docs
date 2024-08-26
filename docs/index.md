@@ -68,3 +68,27 @@ Furthermore, Jinetics supports additional software components (at additional cha
 - `data_plotting_module`: Live-view during data acquisition.
 - `data_analysis`: Analysis code for fuel cell testing protocols and detailed analysis of acquired data results.
 - A graphic user interface (GUI) that enables the operation of this software without a single line of code.
+
+## Python Thread Structure and Safety Reset
+
+The pyFCM software suite that runs on the main Python thread launches additional sub-threads for logging and for monitoring 
+safety conditions named `Logger` and `Killswitch` threads, respectively. Some hardware components also have their own logging 
+thread for stability reasons. Most software modules have built-in safety checks (details below) and once any safety check in any initialized module
+is detected the software will prematurely terminate and run the function `hardware_reset` which resets all gases and temperatures 
+back to 0. For hardware supplied by Jinetics the corresponding software modules have the following safety check implemented:
+
+- `electrical_control_module`: The user can attach any device (e.g., a hydrogen detector) to the Jinetic's supplied DAQ. 
+If the DAQ reads "1" from that device, the `Killswitch` shutoff thread will be triggered.
+- `heater_control_module`: If temperature 1 reads more than 100 C, the Killswitch` shutoff thread will be triggered.
+- `cathode_flow_module` and `anode_flow_module`: If the measured gas flow deviates from the setpoint for an extended period of time, 
+the Killswitch` shutoff thread will be triggered.
+
+!!! note "For Custom Hardware Templates"
+    
+    For modules were software templates are utilized (i.e., Jinetics did not supply the hardware component) the user has complete freedom to specify their own
+    safety conditions. This should be done inside the class's `reading` function such that when the user's specified safety condition is met, set `self.ks = True`.
+
+!!! warning 
+
+    If for any reason the main Python thread terminates prematurely (e.g., user presses ctrl+c or a Python error is encountered) then all sub-threads terminate with it. 
+    In these cases, we recommend to manually run the `hardware_reset` function to ensure all setpoints are safely set back to 0.
