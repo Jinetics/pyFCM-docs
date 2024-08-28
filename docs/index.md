@@ -83,6 +83,7 @@ the `Killswitch` shutoff thread will be triggered.
 
 !!! note "For Custom Hardware Templates"
     
-    For modules were software templates are utilized (i.e., Jinetics did not supply the hardware component) the user has complete freedom to specify their own
-    safety conditions. This should be done inside the class's `reading` function such that when the user's specified safety condition is met, set `self.ks = True`.
+    For modules where software templates are used (i.e., where Jinetics has not provided the hardware component), users have full flexibility 
+    to define their own safety conditions. These conditions should be specified within the class's `reading` function so that when the user's 
+    criteria are satisfied, `self.ks` is set to `True`.
 
