@@ -250,17 +250,17 @@ def set_values(self, temp1: float = np.nan, temp2: float = np.nan, temp3: float 
 def read_backpressures(self) -> tuple[float, float]:
     """
     Requires `backpressure_module`
-    Reads the cathode and anode back-pressures.
+    Reads the cathode and anode back-pressures. Values need to be returned in kPa.
     :return: (tuple[float, float]) Tuple of anode and cathode back-pressures
     """
 ```
 
 ```Python3
-def set_bkp_anode(self, pressure_setpoint: int, power: int = 4) -> None:
+def set_bkp_anode(self, pressure_setpoint: float, power: int = 4) -> None:
     """
     Requires `backpressure_module` and `anode_flow_module`
     Sets the back-pressure of the anode.
-    :param pressure_setpoint: (int) The back-pressure set point of the anode
+    :param pressure_setpoint: (float) The back-pressure set point of the anode
     :param power: (int) Power level of the anode
         Default: 4
     :return: None
@@ -268,11 +268,11 @@ def set_bkp_anode(self, pressure_setpoint: int, power: int = 4) -> None:
 ```
 
 ```Python3
-def set_bkp_cathode(self, pressure_setpoint: int, power: int = 4) -> None:
+def set_bkp_cathode(self, pressure_setpoint: float, power: int = 4) -> None:
     """
     Requires `backpressure_module` and `cathode_flow_module`
     Sets the back-pressure of the cathode.
-    :param pressure_setpoint: (int) The back-pressure set point of the cathode
+    :param pressure_setpoint: (float) The back-pressure set point of the cathode
     :param power: (int) Power level of the cathode
         Default: 4
     :return: None
