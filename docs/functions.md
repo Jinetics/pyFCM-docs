@@ -20,7 +20,7 @@ def __init__(self,
              load_module: type[LoadProtocol] | LoadProtocol | None = None,
              potentiostat_module: type[PotentiostatProtocol] | PotentiostatProtocol | None = None,
              backpressure_module: type[BackpressureProtocol] | BackpressureProtocol | None = None,
-             run_basehall: bool = False, start_killswitch_thread: bool = True,
+             run_basehall: bool = False, start_killswitch_thread: bool = True, run_reset_on_exit: bool = True,
              file_output: bool = True, startup_instructions: bool = True, verbose: bool = True,
              outdir: str | None = None, recipe_id: str | None = None, sample_id: str | None = None,
              log_refresh_rate: float = 0.3
@@ -47,6 +47,8 @@ def __init__(self,
         Default: False
     :param start_killswitch_thread: (bool) Whether to start the killswitch thread in the beginning
         Default: True
+    :param run_reset_on_exit: (bool) Whether to run reset_hardware upon exit (triggers even when ctrl+c or error)
+            Default: True
     :param file_output: (bool) Whether to generate log files
         Default: True
     :param startup_instructions: (bool) Whether to list the startup instructions
@@ -190,6 +192,18 @@ def read_impurities(self) -> tuple[float, float]:
     """
 ```
 
+```Python3
+def potentiostat_mode(self, duration: float = 360000.0, pause_log: bool = True):
+    """
+    Requires `electrical_control_module`
+    Interactive potentiostat mode where the user can manually operate the potentiostat in the middle of a pyFCM run
+    :param duration: (float) Max duration of the manual operation mode (in seconds)
+        Default: 360000.0
+    :param pause_log: (bool) Whether to pause the logging while in manual mode
+        Default: True
+    :return:
+    """
+```
 
 ## Functions Requiring `heater_control_module`
 
@@ -233,11 +247,11 @@ def set_values(self, temp1: float = np.nan, temp2: float = np.nan, temp3: float 
 ## Functions Requiring `backpressure_module`
 
 ```Python3
-def read_back_pressures(self) -> tuple[float, float]:
+def read_backpressures(self) -> tuple[float, float]:
     """
-    Requires `electrical_control_module`; fuel cell-only function
+    Requires `backpressure_module`
     Reads the cathode and anode back-pressures.
-    :return: (tuple[float, float]) Typle of anode and cathode back-pressures
+    :return: (tuple[float, float]) Tuple of anode and cathode back-pressures
     """
 ```
 
