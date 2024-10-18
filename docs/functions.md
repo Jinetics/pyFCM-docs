@@ -392,7 +392,7 @@ def switch_to_air_cathode(self) -> None:
 def read_backpressures(self) -> tuple[float, float]:
     """
     Requires `backpressure_module`
-    Reads the cathode and anode back-pressures. Values need to be returned in kPa.
+    Reads the cathode and anode back-pressures.
     :return: (tuple[float, float]) Tuple of anode and cathode back-pressures
     """
 ```
