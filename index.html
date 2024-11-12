@@ -1,0 +1,633 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://jinetics.github.io/pyFCM-docs/">
+      
+      
+      
+        <link rel="next" href="init/">
+      
+      
+      <link rel="icon" href="logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.44">
+    
+    
+      
+        <title>Documentation for pyFCM v2+</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="lime">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#documentation-for-pyfcm-software-suite" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="Documentation for pyFCM v2+" class="md-header__button md-logo" aria-label="Documentation for pyFCM v2+" data-md-component="logo">
+      
+  <img src="logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Documentation for pyFCM v2+
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Software Overview
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="lime"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Documentation for pyFCM v2+" class="md-nav__button md-logo" aria-label="Documentation for pyFCM v2+" data-md-component="logo">
+      
+  <img src="logo.png" alt="logo">
+
+    </a>
+    Documentation for pyFCM v2+
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Software Overview
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Software Overview
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hardware-components-and-their-interaction-with-pyfcm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hardware Components and Their Interaction with pyFCM
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#software-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Software Structure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#software-safety-feature" class="md-nav__link">
+    <span class="md-ellipsis">
+      Software Safety Feature
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="init/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Initialization and Usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="functions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Available Functions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="custom/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hardware Customization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hardware-components-and-their-interaction-with-pyfcm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hardware Components and Their Interaction with pyFCM
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#software-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Software Structure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#software-safety-feature" class="md-nav__link">
+    <span class="md-ellipsis">
+      Software Safety Feature
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="documentation-for-pyfcm-software-suite">Documentation for pyFCM Software Suite</h1>
+<p>This website explains how the pyFCM software suite can be set up and used.</p>
+<h2 id="installation">Installation</h2>
+<p>The software which is based on Python 3.10 is already pre-installed on the supplied computers. 
+It can be used through Python's import statement. 
+For example, the main class can be imported by <code>from pyFCM.process_control_module import PCM</code>. 
+Details and examples on initializing the class are explained <a href="init/">here</a>.</p>
+<h2 id="hardware-components-and-their-interaction-with-pyfcm">Hardware Components and Their Interaction with pyFCM</h2>
+<p>The software can be used with different hardware components. There are two options on how the software interfaces 
+with each hardware component:</p>
+<ol>
+<li>The hardware component is supplied by Jinetics and the related software interface code is therefore also 
+supplied by Jinetics.</li>
+<li>The hardware component is sourced by the user. In this case, the interface code needs to be completed by 
+the user through template interface files (more details on <a href="custom/">this page</a>).</li>
+</ol>
+<p>A list of high-level functions is available in the pyFCM suite and some of them rely on the availability of 
+certain hardware components. A complete list of available functions is available <a href="functions/">here</a>.</p>
+<h2 id="software-structure">Software Structure</h2>
+<p>The main entry point for using the pyFCM software is the <strong>process control module</strong> and its <code>PCM</code> class which has 
+high-level functions related to electrolyzer and/or fuel cell testing protocols. It also logs data from all 
+hardware components which are initialized through the software suite. 
+Further, it monitors certain signals that can act as kill switch conditions to shut off the system.</p>
+<p>Here is a full list of all software interfaces with the hardware components:</p>
+<ul>
+<li><code>electrical_control_module</code> (always provided by Jinetics)<ul>
+<li>For fuel cell testing: This interface works with the 
+main electrical unit to measure voltages/currents during fuel cell testing and set the states of 
+3 relays (one of which acts as an MFC shutoff). It also reads the backpressures from the backpressure 
+hardware (if provided by Jinetics).</li>
+<li>For fuel cell testing: This interface works with the 
+main electrical unit to measure voltages/currents during electrolyzer testing and read &amp; set the 
+anode and cathode gas pressures. It sets the states of relays (one of which acts as an MFC shutoff).</li>
+<li><code>data_acquisition_hardware</code>: This module interfaces with the data acquisition hardware provided by Jinetics. 
+This class is initialized and used as an input variable during initialization of 
+the <code>electrical_control_module</code>.</li>
+</ul>
+</li>
+<li><code>heater_control_module</code> (optionally provided by Jinetics): This interface is designed to measure and set up
+to 8 temperatures. If not provided by Jinetics, then any 8 values can be set/measured (not necessarily related to 
+temperature).</li>
+<li><code>cathode_flow_module</code> and <code>anode_flow_module</code> (for fuel cell testing; optionally provided by Jinetics): These modules
+set and read the flow rates of gases and water for the anode and cathode side during fuel cell testing. It is equipped 
+to switch between multiple gases and uses our in-house algorithm module to set the RH accurately.</li>
+<li><code>backpressure_module</code> (for fuel cell testing; optionally provided by Jinetics): This module sets the backpressures 
+of the anode and cathode during fuel cell testing.</li>
+<li><code>load_hardware</code> (for fuel cell and electrolyzer testing; optionally provided by Jinetics): This module manages the 
+load during fuel cell testing or manages the power source during electrolyzer testing. It sets voltage and currents 
+during testing.</li>
+<li><code>potentiostat_hardware</code> (for fuel cell and electrolyzer testing; optionally provided by Jinetics): This module manages
+the potentiostat during fuel cell and electrolyzer testing. It enables functions like cyclic voltammetry, 
+squarewave mode, among others.</li>
+</ul>
+<p>Furthermore, Jinetics supports additional software components (at additional charge):</p>
+<ul>
+<li><code>recipe_loading_module</code>: Enables the loading of test recipe files for ease of use and editing.</li>
+<li><code>data_plotting_module</code>: Live-view during data acquisition.</li>
+<li><code>data_analysis</code>: Analysis code for fuel cell testing protocols and detailed analysis of acquired data results.</li>
+<li>A graphic user interface (GUI) that enables the operation of this software without a single line of code.</li>
+</ul>
+<h2 id="software-safety-feature">Software Safety Feature</h2>
+<p>In addition to hardware components with their own safety features, the pyFCM software runs a <code>Killswitch</code> process that can prematurely 
+terminate the test protocol and run the function <code>hardware_reset</code> which resets all gases and temperatures back to 0. 
+For hardware supplied by Jinetics the corresponding software modules have the following safety checks implemented:</p>
+<ul>
+<li><code>electrical_control_module</code>: The user can attach any device (e.g., a hydrogen detector) to the Jinetic's supplied electrical control unit. 
+Upon reading a high state (5-10 V) from the device, the <code>Killswitch</code> shutoff will be triggered.</li>
+<li><code>heater_control_module</code>: If temperature 1 (cell temperature) reads more than 100 C, the <code>Killswitch</code> shutoff will be triggered.</li>
+<li><code>cathode_flow_module</code> and <code>anode_flow_module</code>: If the measured gas flow deviates from the setpoint for an extended period of time, 
+the <code>Killswitch</code> shutoff thread will be triggered.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">For Custom Hardware Templates</p>
+<p>For modules where software templates are used (i.e., where Jinetics has not provided the hardware component), users have full flexibility 
+to define their own safety conditions. These conditions should be specified within the class's <code>reading</code> function so that when the user's 
+criteria are satisfied, <code>self.ks</code> is set to <code>True</code>.</p>
+</div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+        
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+        
+          
+          <a href="init/" class="md-footer__link md-footer__link--next" aria-label="Next: Initialization and Usage">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Initialization and Usage
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2024 Jinetics
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.footer", "navigation.path", "navigation.tracking", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  </body>
+</html>
