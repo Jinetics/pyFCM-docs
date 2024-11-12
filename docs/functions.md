@@ -20,6 +20,7 @@ def __init__(self,
              load_module: type[LoadProtocol] | LoadProtocol | None = None,
              potentiostat_module: type[PotentiostatProtocol] | PotentiostatProtocol | None = None,
              backpressure_module: type[BackpressureProtocol] | BackpressureProtocol | None = None,
+             default_gas_anode: str = 'H2', default_gas_cathode: str = 'air',
              run_basehall: bool = False, start_killswitch_thread: bool = True, run_reset_on_exit: bool = True,
              file_output: bool = True, startup_instructions: bool = True, verbose: bool = True,
              outdir: str | None = None, recipe_id: str | None = None, sample_id: str | None = None,
@@ -43,6 +44,10 @@ def __init__(self,
         Default: None
     :param backpressure_module: Instance of `backpressure_module` class
         Default: None
+    :param default_gas_anode: (str) Default gas when anode is reset
+        Default: 'H2'
+    :param default_gas_cathode: (str) Default gas when cathode is reset
+        Default: 'air'
     :param run_basehall: (bool) Whether to run basehall measurement in the beginning
         Default: False
     :param start_killswitch_thread: (bool) Whether to start the killswitch thread in the beginning
@@ -112,13 +117,13 @@ def log_text(self, text: str) -> None:
 ```
 
 ```Python3
-def hardware_reset(self, default_gas_anode: str = 'H2', default_gas_cathode: str = 'air') -> None:
+def hardware_reset(self, default_gas_anode: str | None = None, default_gas_cathode: str | None = None) -> None:
     """
     Resets all hardware components that were initialized.
-    :param default_gas_anode: (str) Default gas for anode (only relevant if `anode_flow_module` is utilized)
-        Default: 'H2'
-    :param default_gas_cathode: (str) Default gas for cathode (only relevant if `cathode_flow_module` is utilized)
-        Default: 'air'
+    :param default_gas_anode: (str | None) Default gas for anode (only relevant if `anode_flow_module` is utilized)
+        Default: None
+    :param default_gas_cathode: (str | None) Default gas for cathode (only relevant if `cathode_flow_module` is utilized)
+        Default: None
     :return: None
     """
 ```
@@ -308,35 +313,35 @@ def set_water_flowrate_cathode(self, flow: float) -> None:
     """
 ```
 ```Python3
-def reset_gases_anode(self, default_gas: str = 'H2') -> None:
+def reset_gases_anode(self, default_gas: str | None = None) -> None:
     """
     Requires `anode_flow_module`
     Resets the pressure of the anode to 0 and switches to the default gas.
-    :param default_gas: (str) The default gas for the anode
-        Default: 'H2'
+    :param default_gas: (str | None) The default gas for the anode
+        Default: None
     :return: None
     """
 ```
 
 ```Python3
-def reset_gases_cathode(self, default_gas: str = 'air') -> None:
+def reset_gases_cathode(self, default_gas: str | None = None) -> None:
     """
     Requires `cathode_flow_module`
     Resets the pressure of the cathode to 0 and switches to the default gas.
-    :param default_gas: (str) The default gas for the cathode
-        Default: 'air'
+    :param default_gas: (str | None) The default gas for the cathode
+        Default: None
     :return: None
     """
 ```
 
 ```Python3
-def reset_gases(self, default_gas_anode: str = 'H2', default_gas_cathode: str = 'air') -> None:
+def reset_gases(self, default_gas_anode: str | None = None, default_gas_cathode: str | None = None) -> None:
     """
     Resets the pressure of the anode to 0 and switches to the default gas.
-    :param default_gas_anode: (str) The default gas for the anode
-        Default: 'H2'
-    :param default_gas_cathode: (str) The default gas for the cathode
-        Default: 'air'
+    :param default_gas_anode: (str | None) The default gas for the anode
+        Default: None
+    :param default_gas_cathode: (str | None) The default gas for the cathode
+        Default: None
     :return: None
     """
 ```
